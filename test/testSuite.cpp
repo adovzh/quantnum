@@ -164,6 +164,36 @@ TEST(GenericVector, CopyFromArray) { // NOLINT
     ASSERT_DOUBLE_EQ(ar[2], v[2]);
 }
 
+TEST(GenericVector, Resize) { // NOLINT
+    const std::size_t size = 5, new_size = 8;
+
+    QN::Vector v(size);
+    ASSERT_EQ(size, v.size());
+
+    v.resize(new_size);
+    ASSERT_EQ(new_size, v.size());
+
+    v.resize(0);
+    ASSERT_EQ(0, v.size());
+}
+
+TEST(GenericVector, Assign) { // NOLINT
+    const std::size_t size = 5, new_size = 8;
+    const double val = 3.14;
+
+    QN::Vector v(size);
+    ASSERT_EQ(size, v.size());
+
+    v.assign(new_size, val);
+    ASSERT_EQ(new_size, v.size());
+
+    for (std::size_t i = 0; i < v.size(); i++)
+        ASSERT_EQ(val, v[i]);
+
+    v.assign(0, val);
+    ASSERT_EQ(0, v.size());
+}
+
 int main(int argc, char** argv) {
     std::cout << "Test Suite: " << qndummy() << std::endl;
 

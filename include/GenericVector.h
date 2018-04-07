@@ -12,6 +12,8 @@ namespace quantnum {
     template <typename T>
     class GenericVector {
     public:
+        typedef T value_type;
+
         explicit GenericVector(std::size_t n = 0);
         GenericVector(std::size_t n, const T& a);
         GenericVector(std::size_t n, const T* a);
@@ -28,6 +30,9 @@ namespace quantnum {
         T& operator[](std::size_t index) { return data_[index]; }
 
         std::size_t size() const { return size_; }
+
+        void resize(std::size_t size);
+        void assign(std::size_t size, const T& a);
     private:
         void allocate() { data_ = size_ > 0 ? new T[size_] : nullptr; }
 
@@ -103,6 +108,25 @@ namespace quantnum {
                 return false;
 
         return true;
+    }
+
+    template <typename T>
+    void GenericVector<T>::resize(std::size_t size) {
+        if (data_ != nullptr)
+            delete[] data_;
+
+        size_ = size;
+        allocate();
+    }
+
+    template <typename T>
+    void GenericVector<T>::assign(std::size_t size, const T& a) {
+        if (data_ != nullptr)
+            delete[] data_;
+
+        size_ = size;
+        allocate();
+        std::fill(data_, data_ + size, a);
     }
 
     typedef GenericVector<double> Vector;
