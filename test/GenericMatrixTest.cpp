@@ -58,7 +58,7 @@ TEST(GenericMatrix, ConstructFromValue) { // NOLINT
 }
 
 TEST(GenericMatrix, ConstructFromArray) { // NOLINT
-    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6};
+    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
     QN::Matrix matrix(2, 3, vals);
 
     ASSERT_EQ(0.1, matrix[0][0]);
@@ -67,4 +67,27 @@ TEST(GenericMatrix, ConstructFromArray) { // NOLINT
     ASSERT_EQ(0.4, matrix[1][0]);
     ASSERT_EQ(0.5, matrix[1][1]);
     ASSERT_EQ(0.6, matrix[1][2]);
+}
+
+TEST(GenericMatrix, CopyConstruct) { // NOLINT
+    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
+    QN::Matrix src(3, 2, vals);
+    QN::Matrix dst = src;
+
+    ASSERT_EQ(0.1, dst[0][0]);
+    ASSERT_EQ(0.2, dst[0][1]);
+    ASSERT_EQ(0.3, dst[1][0]);
+    ASSERT_EQ(0.4, dst[1][1]);
+    ASSERT_EQ(0.5, dst[2][0]);
+    ASSERT_EQ(0.6, dst[2][1]);
+}
+
+TEST(GenericMatrix, Assignment) { // NOLINT
+    constexpr double vals[] = { 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1 };
+    QN::Matrix src(3, 3, vals);
+    QN::Matrix dst(2, 2, 2.0);
+    ASSERT_TRUE(src != dst);
+
+    dst = src;
+    ASSERT_TRUE(src == dst);
 }
