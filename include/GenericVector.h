@@ -6,6 +6,7 @@
 #define QUANTNUM_VECTOR_H
 
 #include <cstddef>
+#include <algorithm>
 
 namespace quantnum {
 

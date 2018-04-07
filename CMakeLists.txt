@@ -23,7 +23,8 @@ ExternalProject_Add(gtest
         )
 ExternalProject_Get_Property(gtest source_dir binary_dir)
 
-add_executable(runTestSuite test/testSuite.cpp)
+file(GLOB test_sources "test/*.cpp")
+add_executable(runTestSuite ${test_sources})
 
 add_dependencies(runTestSuite gtest)
 include_directories("${PROJECT_SOURCE_DIR}/include" ${source_dir}/include)
