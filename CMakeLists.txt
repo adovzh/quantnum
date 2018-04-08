@@ -23,7 +23,7 @@ ExternalProject_Add(gtest
         )
 ExternalProject_Get_Property(gtest source_dir binary_dir)
 
-file(GLOB test_sources "test/*.cpp")
+file(GLOB test_sources "test/*.cpp" "test/*.h")
 add_executable(runTestSuite ${test_sources})
 
 add_dependencies(runTestSuite gtest)

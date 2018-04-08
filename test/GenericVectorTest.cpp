@@ -4,6 +4,7 @@
 
 #include <GenericVector.h>
 #include <gtest/gtest.h>
+#include "TestHelpers.h"
 
 namespace QN = quantnum;
 
@@ -132,7 +133,7 @@ TEST(GenericVector, ZeroLength) { // NOLINT
     z1 = v2;
     ASSERT_EQ(4, z1.size());
 
-    std::swap(z1, v1);
+    quantnum_test::swap(z1, v1);
 
     ASSERT_EQ(0, z1.size());
     ASSERT_EQ(0, z2.size());

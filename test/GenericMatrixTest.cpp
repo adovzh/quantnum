@@ -4,6 +4,7 @@
 
 #include <GenericMatrix.h>
 #include <gtest/gtest.h>
+#include "TestHelpers.h"
 
 namespace QN = quantnum;
 
@@ -90,4 +91,68 @@ TEST(GenericMatrix, Assignment) { // NOLINT
 
     dst = src;
     ASSERT_TRUE(src == dst);
+}
+
+TEST(GenericMatrix, MoveContructor) { // NOLINT
+    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
+    QN::Matrix src(2, 3, vals);
+    QN::Matrix matrix(std::move(src));
+
+    ASSERT_EQ(2, matrix.nrow());
+    ASSERT_EQ(3, matrix.ncol());
+
+    ASSERT_EQ(0.1, matrix[0][0]);
+    ASSERT_EQ(0.2, matrix[0][1]);
+    ASSERT_EQ(0.3, matrix[0][2]);
+    ASSERT_EQ(0.4, matrix[1][0]);
+    ASSERT_EQ(0.5, matrix[1][1]);
+    ASSERT_EQ(0.6, matrix[1][2]);
+
+    ASSERT_EQ(0, src.nrow()); // NOLINT
+    ASSERT_EQ(0, src.ncol());
+}
+
+TEST(GenericMatrix, MoveAssignment) { // NOLINT
+    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
+    QN::Matrix src(2, 3, vals);
+    QN::Matrix matrix(2, 1, 2.3);
+
+    matrix = std::move(src);
+
+    ASSERT_EQ(2, matrix.nrow());
+    ASSERT_EQ(3, matrix.ncol());
+
+    ASSERT_EQ(0.1, matrix[0][0]);
+    ASSERT_EQ(0.2, matrix[0][1]);
+    ASSERT_EQ(0.3, matrix[0][2]);
+    ASSERT_EQ(0.4, matrix[1][0]);
+    ASSERT_EQ(0.5, matrix[1][1]);
+    ASSERT_EQ(0.6, matrix[1][2]);
+
+    ASSERT_EQ(0, src.nrow()); // NOLINT
+    ASSERT_EQ(0, src.ncol());
+}
+
+TEST(GenericMatrix, Swap) { // NOLINT
+    constexpr double vals[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
+    constexpr double val = 2.3;
+    QN::Matrix src(2, 3, vals);
+    QN::Matrix matrix(2, 1, val);
+
+    quantnum_test::swap(src, matrix);
+
+    ASSERT_EQ(2, matrix.nrow());
+    ASSERT_EQ(3, matrix.ncol());
+
+    ASSERT_EQ(0.1, matrix[0][0]);
+    ASSERT_EQ(0.2, matrix[0][1]);
+    ASSERT_EQ(0.3, matrix[0][2]);
+    ASSERT_EQ(0.4, matrix[1][0]);
+    ASSERT_EQ(0.5, matrix[1][1]);
+    ASSERT_EQ(0.6, matrix[1][2]);
+
+    ASSERT_EQ(2, src.nrow());
+    ASSERT_EQ(1, src.ncol());
+    ASSERT_EQ(val, src[0][0]);
+    ASSERT_EQ(val, src[1][0]);
 }

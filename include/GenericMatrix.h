@@ -21,7 +21,9 @@ namespace quantnum {
         ~GenericMatrix();
 
         GenericMatrix(const GenericMatrix& that);
+        GenericMatrix(GenericMatrix&& that) noexcept;
         GenericMatrix& operator=(const GenericMatrix& that);
+        GenericMatrix& operator=(GenericMatrix&& that) noexcept;
         bool operator==(const GenericMatrix& that) const;
         bool operator!=(const GenericMatrix& that) const { return !(*this == that); }
 
@@ -77,6 +79,13 @@ namespace quantnum {
     }
 
     template<typename T>
+    GenericMatrix<T>::GenericMatrix(GenericMatrix&& that) noexcept:
+            n_(that.n_), m_(that.m_), data_(that.data_) {
+        that.data_ = nullptr;
+        that.n_ = that.m_ = 0;
+    }
+
+    template<typename T>
     GenericMatrix<T>& GenericMatrix<T>::operator=(const GenericMatrix<T>& that) {
         if (data_ != nullptr) {
             delete[] *data_;
@@ -92,6 +101,23 @@ namespace quantnum {
         if (data_ != nullptr) {
             std::copy(that.data_[0], that.data_[0] + that.size(), data_[0]);
         }
+
+        return *this;
+    }
+
+    template<typename T>
+    GenericMatrix<T>& GenericMatrix<T>::operator=(GenericMatrix&& that) noexcept {
+        if (data_ != nullptr) {
+            delete[] *data_;
+            delete data_;
+        }
+
+        n_ = that.n_;
+        m_ = that.m_;
+        data_ = that.data_;
+
+        that.data_ = nullptr;
+        that.n_ = that.m_ = 0;
 
         return *this;
     }
