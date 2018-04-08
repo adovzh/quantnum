@@ -32,6 +32,9 @@ namespace quantnum {
 
         std::size_t nrow() const { return n_; }
         std::size_t ncol() const { return m_; }
+
+        void resize(std::size_t n, std::size_t m);
+        void assign(std::size_t n, std::size_t m, const T& a);
     private:
         void allocate(std::size_t n, std::size_t m);
         std::size_t size() const { return n_ * m_; }
@@ -128,6 +131,16 @@ namespace quantnum {
             return false;
 
         return std::equal(data_[0], data_[0] + size(), that.data_[0]);
+    }
+
+    template<typename T>
+    void GenericMatrix<T>::resize(std::size_t n, std::size_t m) {
+        *this = GenericMatrix(n, m);
+    }
+
+    template<typename T>
+    void GenericMatrix<T>::assign(std::size_t n, std::size_t m, const T& a) {
+        *this = GenericMatrix(n, m, a);
     }
 
     template <typename T>

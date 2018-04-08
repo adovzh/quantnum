@@ -156,3 +156,28 @@ TEST(GenericMatrix, Swap) { // NOLINT
     ASSERT_EQ(val, src[0][0]);
     ASSERT_EQ(val, src[1][0]);
 }
+
+TEST(GenericMatrix, Resize) { // NOLINT
+    QN::Matrix matrix(2, 5);
+    ASSERT_EQ(2, matrix.nrow());
+    ASSERT_EQ(5, matrix.ncol());
+
+    matrix.resize(6, 3);
+    ASSERT_EQ(6, matrix.nrow());
+    ASSERT_EQ(3, matrix.ncol());
+}
+
+TEST(GenericMatrix, Assign) { // NOLINT
+    constexpr double val = 3.14;
+    QN::Matrix matrix(3, 1);
+    ASSERT_EQ(3, matrix.nrow());
+    ASSERT_EQ(1, matrix.ncol());
+
+    matrix.assign(2, 2, val);
+    ASSERT_EQ(2, matrix.nrow());
+    ASSERT_EQ(2, matrix.ncol());
+    ASSERT_EQ(val, matrix[0][0]);
+    ASSERT_EQ(val, matrix[0][1]);
+    ASSERT_EQ(val, matrix[1][0]);
+    ASSERT_EQ(val, matrix[1][1]);
+}
