@@ -5,6 +5,7 @@
 #include <GenericVector.h>
 #include <gtest/gtest.h>
 #include "TestHelpers.h"
+#include <functional>
 
 namespace QN = quantnum;
 

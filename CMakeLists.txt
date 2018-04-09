@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.9)
 project(quantnum)
 
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build")
@@ -30,5 +30,7 @@ add_dependencies(runTestSuite gtest)
 include_directories("${PROJECT_SOURCE_DIR}/include" ${source_dir}/include)
 target_link_libraries(runTestSuite ${binary_dir}/libgtest.a)
 target_link_libraries(runTestSuite ${binary_dir}/libgtest_main.a)
+target_link_libraries(runTestSuite pthread)
 
 target_link_libraries(runTestSuite quantnum)
+
