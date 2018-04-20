@@ -1,3 +1,9 @@
 .idea
 build
 cmake-build-debug
+.Rproj.user
+.RData
+.Rhistory
+*.Rproj
+*.o
+*.so
