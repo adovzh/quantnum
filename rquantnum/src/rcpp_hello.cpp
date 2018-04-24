@@ -20,15 +20,6 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-List rcpp_hello() {
-    quantnum::Vector v(2, 1.3);
-  CharacterVector x = CharacterVector::create("foo", "bar");
-  NumericVector y   = NumericVector::create(0.0, 1.0, v[0], v[1]);
-  List z            = List::create(x, y);
-  return z;
-}
-
-// [[Rcpp::export]]
 NumericVector lininterp(const NumericVector& basex,
                         const NumericVector& basey,
                         const NumericVector& xs) {

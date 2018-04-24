@@ -5,16 +5,6 @@
 
 using namespace Rcpp;
 
-// rcpp_hello
-List rcpp_hello();
-RcppExport SEXP _rquantnum_rcpp_hello() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello());
-    return rcpp_result_gen;
-END_RCPP
-}
 // lininterp
 NumericVector lininterp(const NumericVector& basex, const NumericVector& basey, const NumericVector& xs);
 RcppExport SEXP _rquantnum_lininterp(SEXP basexSEXP, SEXP baseySEXP, SEXP xsSEXP) {
@@ -30,7 +20,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rquantnum_rcpp_hello", (DL_FUNC) &_rquantnum_rcpp_hello, 0},
     {"_rquantnum_lininterp", (DL_FUNC) &_rquantnum_lininterp, 3},
     {NULL, NULL, 0}
 };

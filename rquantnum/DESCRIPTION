@@ -1,12 +1,12 @@
 Package: rquantnum
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R interface to rquantnum functionality
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Alexaner Dovzhikov
+Maintainer: Alexander Dovzhikov <alexander.dovzhikov@gmail.com>
+Description: QuantNum library provides C++ interface to numerical algorithms inspired by Numerical Recipes book.
+    This package is an R interface to it.
+License: 
 Encoding: UTF-8
 LazyData: true
 Imports: Rcpp (>= 0.12.13)
