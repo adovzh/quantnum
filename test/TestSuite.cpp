@@ -6,22 +6,7 @@
 #include <GenericVector.h>
 #include <qndummy.h>
 #include <gtest/gtest.h>
-
-namespace quantnum_test {
-
-    template <typename T>
-    void Print(const char* msg, quantnum::GenericVector<T>& v) {
-        std::size_t i;
-
-        std::cout << msg << ": ";
-
-        for (i = 0; i < v.size(); i++)
-            std::cout << v[i] << " ";
-
-        std::cout << std::endl;
-    }
-
-}
+#include "TestHelpers.h"
 
 int main(int argc, char** argv) {
     std::cout << "Test Suite: " << qndummy() << std::endl;

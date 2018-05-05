@@ -28,3 +28,19 @@ testLinear <- function() {
     ggplot() + geom_line(data = ids, aes(x = ix, y = iy)) +
         geom_point(data = ds, aes(x = x, y = y))
 }
+
+testPoly <- function(m) {
+    library(tibble)
+    library(ggplot2)
+
+    x <- 1:5
+    y <- c(2, 3, 5, 10, 7)
+    ds <- tibble(x = x, y = y)
+
+    ix <- seq(1, 5, 0.01)
+    iy <- polyinterp(x, y, m, ix)
+    ids <- tibble(x = ix, y = iy)
+
+    ggplot() + geom_line(data = ids, aes(x = ix, y = iy)) +
+        geom_point(data = ds, aes(x = x, y = y))
+}

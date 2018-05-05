@@ -3,6 +3,7 @@
 //
 #include <gtest/gtest.h>
 #include <LinearInterpolation.h>
+#include <PolynomialInterpolation.h>
 
 namespace QN = quantnum;
 
@@ -40,4 +41,28 @@ TEST(BaseInterpolation, TSLinear) { // NOLINT
 
     for (std::size_t i = 0; i < 18; i++)
         ASSERT_NEAR(gridy[i], lin.interpolate(gridx[i]), 1e-12);
+}
+
+TEST(BaseInterpolation, TSPolynomial) { // NOLINT
+    QN::Vector xs = { 1.0, 2.0, 3.0 };
+    QN::Vector ys = { 1.0, 2.0, 1.0 };
+    QN::PolynomialInterpolation poly(xs ,ys, 2);
+
+    QN::Vector gridx = { 1.3, 1.7, 2.0, 2.2, 2.5, 2.76, 3.0 };
+    QN::Vector gridy = { 1.3, 1.7, 2.0, 1.8, 1.5, 1.24, 1.0 };
+
+    for (std::size_t i = 0; i < gridx.size(); i++)
+        ASSERT_NEAR(gridy[i], poly.interpolate(gridx[i]), 1e-12);
+}
+
+TEST(BaseInterpolation, TSPolynomial2) { // NOLINT
+    QN::Vector xs = { 1.0, 2.0 };
+    QN::Vector ys = { 2.0, 3.0 };
+    QN::PolynomialInterpolation poly(xs, ys, 2);
+
+    QN::Vector gridx = { 1.3, 1.7, 2.0 };
+    QN::Vector gridy = { 2.3, 2.7, 3.0 };
+
+    for (std::size_t i = 0; i < gridx.size(); i++)
+        ASSERT_NEAR(gridy[i], poly.interpolate(gridx[i]), 1e-12);
 }

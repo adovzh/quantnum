@@ -5,3 +5,7 @@ lininterp <- function(basex, basey, xs) {
     .Call('_rquantnum_lininterp', PACKAGE = 'rquantnum', basex, basey, xs)
 }
 
+polyinterp <- function(basex, basey, m, xs) {
+    .Call('_rquantnum_polyinterp', PACKAGE = 'rquantnum', basex, basey, m, xs)
+}
+

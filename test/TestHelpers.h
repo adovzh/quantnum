@@ -6,6 +6,7 @@
 #define QUANTNUM_TESTHELPERS_H
 
 #include <utility>
+#include <GenericVector.h>
 
 namespace quantnum_test {
 
@@ -16,6 +17,17 @@ namespace quantnum_test {
         y = std::move(tmp);
     }
 
+    template <typename T>
+    void Print(const char* msg, quantnum::GenericVector<T>& v) {
+        std::size_t i;
+
+        std::cout << msg << ": ";
+
+        for (i = 0; i < v.size(); i++)
+            std::cout << v[i] << " ";
+
+        std::cout << std::endl;
+    }
 } // quantnum_test
 
 #endif //QUANTNUM_TESTHELPERS_H

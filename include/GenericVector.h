@@ -18,6 +18,7 @@ namespace quantnum {
         explicit GenericVector(std::size_t n = 0);
         GenericVector(std::size_t n, const T& a);
         GenericVector(std::size_t n, const T* a);
+        GenericVector(std::initializer_list<T> il);
         ~GenericVector() { if (data_ != nullptr) delete[] data_; }
 
         GenericVector(const GenericVector& that);
@@ -68,6 +69,12 @@ namespace quantnum {
     inline GenericVector<T>::GenericVector(GenericVector&& that) noexcept : size_(that.size_), data_(that.data_) {
         that.data_ = nullptr;
         that.size_ = 0;
+    }
+
+    template <typename T>
+    inline GenericVector<T>::GenericVector(std::initializer_list<T> il): size_(il.size()) {
+        allocate();
+        std::copy(il.begin(), il.end(), data_);
     }
 
     template<typename T>
