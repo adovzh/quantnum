@@ -1,25 +1,13 @@
 #include <GenericVector.h>
 #include <LinearInterpolation.h>
 #include <PolynomialInterpolation.h>
+#include <SplineInterpolation.h>
 
 #include <algorithm>
 
 #include <Rcpp.h>
+
 using namespace Rcpp;
-
-// This is a simple function using Rcpp that creates an R list
-// containing a character vector and a numeric vector.
-//
-// Learn more about how to use Rcpp at:
-//
-//   http://www.rcpp.org/
-//   http://adv-r.had.co.nz/Rcpp.html
-//
-// and browse examples of code using Rcpp at:
-//
-//   http://gallery.rcpp.org/
-//
-
 namespace QN = quantnum;
 
 // [[Rcpp::export]]
@@ -62,6 +50,27 @@ NumericVector polyinterp(const NumericVector& basex,
 
     for (int i = 0; i < xs_size; i++)
         qys[i] = poly.interpolate(xs[i]);
+
+    return NumericVector(&qys[0], &qys[xs_size]);
+}
+
+// [[Rcpp::export]]
+NumericVector splineinterp(const NumericVector& basex,
+                          const NumericVector& basey,
+                          const NumericVector& xs) {
+    QN::Vector qbasex(basex.size());
+    QN::Vector qbasey(basey.size());
+
+    std::copy(basex.begin(), basex.end(), &qbasex[0]);
+    std::copy(basey.begin(), basey.end(), &qbasey[0]);
+
+    int xs_size = xs.size();
+    QN::Vector qys(xs_size);
+
+    QN::SplineInterpolation spl(qbasex, qbasey);
+
+    for (int i = 0; i < xs_size; i++)
+        qys[i] = spl.interpolate(xs[i]);
 
     return NumericVector(&qys[0], &qys[xs_size]);
 }

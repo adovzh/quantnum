@@ -9,3 +9,7 @@ polyinterp <- function(basex, basey, m, xs) {
     .Call('_rquantnum_polyinterp', PACKAGE = 'rquantnum', basex, basey, m, xs)
 }
 
+splineinterp <- function(basex, basey, xs) {
+    .Call('_rquantnum_splineinterp', PACKAGE = 'rquantnum', basex, basey, xs)
+}
+

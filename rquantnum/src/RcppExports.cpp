@@ -32,10 +32,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// splineinterp
+NumericVector splineinterp(const NumericVector& basex, const NumericVector& basey, const NumericVector& xs);
+RcppExport SEXP _rquantnum_splineinterp(SEXP basexSEXP, SEXP baseySEXP, SEXP xsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type basex(basexSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type basey(baseySEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type xs(xsSEXP);
+    rcpp_result_gen = Rcpp::wrap(splineinterp(basex, basey, xs));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rquantnum_lininterp", (DL_FUNC) &_rquantnum_lininterp, 3},
     {"_rquantnum_polyinterp", (DL_FUNC) &_rquantnum_polyinterp, 4},
+    {"_rquantnum_splineinterp", (DL_FUNC) &_rquantnum_splineinterp, 3},
     {NULL, NULL, 0}
 };
 
