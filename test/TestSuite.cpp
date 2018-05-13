@@ -4,12 +4,11 @@
 
 #include <iostream>
 #include <GenericVector.h>
-#include <qndummy.h>
 #include <gtest/gtest.h>
 #include "TestHelpers.h"
 
 int main(int argc, char** argv) {
-    std::cout << "Test Suite: " << qndummy() << std::endl;
+    std::cout << "Test Suite: " << std::endl;
 
     quantnum::Vector vector(3, 0.123);
     quantnum_test::Print("vector", vector);
