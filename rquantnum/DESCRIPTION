@@ -9,5 +9,5 @@ Description: QuantNum library provides C++ interface to numerical algorithms ins
 License: 
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 0.12.13)
+Imports: Rcpp (>= 0.12.13), tibble, ggplot2, dplyr, tidyr
 LinkingTo: Rcpp

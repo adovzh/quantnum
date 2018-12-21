@@ -31,13 +31,14 @@ testInterps <- function(...) {
         ids <- ids %>% mutate(Spline = iy)
     }
 
-    ids.melted <- ids %>% gather(method, y, -x)
+    ids.melted <- ids %>% gather(Method, y, -x)
 
-    ggplot() + geom_line(data = ids.melted, aes(x, y, color = method)) +
-        geom_point(data = ds, aes(x = x, y = y))
+    ggplot() + geom_line(data = ids.melted, aes(x, y, color = Method)) +
+        geom_point(data = ds, aes(x = x, y = y)) +
+        ggtitle("Interpolation Methods")
 }
 
 testLinear <- function() testInterps("lin")
-testPoly <- function(m) testInterps("poly")
+testPoly <- function() testInterps("poly")
 testSpline <- function() testInterps("spline")
 testAllInterps <- function() testInterps("all")
