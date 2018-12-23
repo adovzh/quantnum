@@ -7,24 +7,16 @@
 
 #include <iostream>
 
+#ifdef __DATES_BOOST_IMPL
+#include "boost_date.h"
 namespace quantnum {
 
-class local_date {
-public:
-    virtual ~local_date() = default;
-    virtual int day() const = 0;
-    virtual int month() const = 0;
-    virtual int year() const = 0;
-
-    virtual std::ostream& to_stream(std::ostream&) const = 0;
-};
-
-inline std::ostream& operator<<(std::ostream& out, const local_date& date) {
-    return date.to_stream(out);
-}
-
-std::unique_ptr<local_date> make_date(int year, int month, int day);
+typedef boost_date local_date;
 
 } // namespace quantnum
+#else
+namespace quantnum {
+}
+#endif
 
 #endif //QUANTNUM_LOCAL_DATE_H

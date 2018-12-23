@@ -7,8 +7,6 @@
 #include <gtest/gtest.h>
 #include "TestHelpers.h"
 
-#define __DATES_BOOST_IMPL
-
 int main(int argc, char** argv) {
     std::cout << "Test Suite: " << std::endl;
 

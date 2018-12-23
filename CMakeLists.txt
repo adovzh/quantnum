@@ -27,6 +27,8 @@ find_package (Boost COMPONENTS date_time REQUIRED)
 include_directories (${Boost_INCLUDE_DIR})
 link_directories (/usr/local/lib ${Boost_LIBRARY_DIR})
 
+add_compile_definitions(__DATES_BOOST_IMPL)
+
 file(GLOB_RECURSE test_sources "test/*.cpp" "test/*.h")
 add_executable(runTestSuite ${test_sources})
 
