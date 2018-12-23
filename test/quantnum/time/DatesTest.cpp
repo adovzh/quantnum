@@ -7,7 +7,7 @@
 
 using namespace quantnum;
 
-TEST(local_date, CreateSimpleDate) { // NOLINT
+TEST(Dates, CreateSimpleDate) { // NOLINT
     auto date = make_date(2012, 12, 21);
     ASSERT_EQ(21, date->day());
     ASSERT_EQ(12, date->month());
