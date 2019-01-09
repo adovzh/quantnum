@@ -12,6 +12,7 @@ namespace quantnum {
 
 class boost_date {
 public:
+    boost_date(): date_(boost::gregorian::day_clock::local_day()) {}
     boost_date(int year, int month, int day): date_(year, month, day) {}
 
     int day() const { return date_.day(); }
